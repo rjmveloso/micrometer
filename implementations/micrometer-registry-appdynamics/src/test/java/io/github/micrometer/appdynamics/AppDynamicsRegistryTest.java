@@ -17,8 +17,11 @@ import static org.mockito.Mockito.*;
 public class AppDynamicsRegistryTest {
 
     private MockClock clock;
+
     private MetricPublisher publisher;
+
     private AppDynamicsConfig config;
+
     private AppDynamicsRegistry registry;
 
     @BeforeEach
@@ -32,9 +35,8 @@ public class AppDynamicsRegistryTest {
     @Test
     void shouldPublishSumValue() {
         final AtomicReference<Object[]> reference = new AtomicReference<>();
-        doAnswer(invocation ->
-                reference.getAndSet(invocation.getArguments())
-        ).when(publisher).reportMetric(anyString(), anyLong(), anyString(), anyString(), anyString());
+        doAnswer(invocation -> reference.getAndSet(invocation.getArguments())).when(publisher).reportMetric(anyString(),
+                anyLong(), anyString(), anyString(), anyString());
 
         registry.counter("counter").increment(10d);
         clock.add(config.step());
@@ -47,31 +49,31 @@ public class AppDynamicsRegistryTest {
     @Test
     void shouldPublishAverageValue() {
         final AtomicReference<Object[]> reference = new AtomicReference<>();
-        doAnswer(invocation ->
-            reference.getAndSet(invocation.getArguments())
-        ).when(publisher).reportMetric(anyString(), anyLong(), anyLong(), anyLong(), anyLong(), anyString(), anyString(), anyString());
+        doAnswer(invocation -> reference.getAndSet(invocation.getArguments())).when(publisher).reportMetric(anyString(),
+                anyLong(), anyLong(), anyLong(), anyLong(), anyString(), anyString(), anyString());
 
         registry.timer("timer").record(100, TimeUnit.MILLISECONDS);
         clock.add(config.step());
 
         registry.publish();
 
-        assertEquals("[" + config.prefix() + "|timer, 100, 1, 100, 100, AVERAGE, AVERAGE, INDIVIDUAL]", Arrays.toString(reference.get()));
+        assertEquals("[" + config.prefix() + "|timer, 100, 1, 100, 100, AVERAGE, AVERAGE, INDIVIDUAL]",
+                Arrays.toString(reference.get()));
     }
 
     @Test
     void shouldPublishObservationValue() {
         final AtomicReference<Object[]> reference = new AtomicReference<>();
-        doAnswer(invocation ->
-            reference.getAndSet(invocation.getArguments())
-        ).when(publisher).reportMetric(anyString(), anyLong(), anyString(), anyString(), anyString());
+        doAnswer(invocation -> reference.getAndSet(invocation.getArguments())).when(publisher).reportMetric(anyString(),
+                anyLong(), anyString(), anyString(), anyString());
 
         registry.gauge("gauge", 10);
         clock.add(config.step());
 
         registry.publish();
 
-        assertEquals("[" + config.prefix() + "|gauge, 10, OBSERVATION, CURRENT, COLLECTIVE]", Arrays.toString(reference.get()));
+        assertEquals("[" + config.prefix() + "|gauge, 10, OBSERVATION, CURRENT, COLLECTIVE]",
+                Arrays.toString(reference.get()));
     }
 
 }
