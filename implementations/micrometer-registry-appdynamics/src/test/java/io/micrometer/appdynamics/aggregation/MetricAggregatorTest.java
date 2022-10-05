@@ -1,4 +1,4 @@
-package io.github.micrometer.appdynamics.aggregation;
+package io.micrometer.appdynamics.aggregation;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,4 +43,5 @@ public class MetricAggregatorTest {
         assertEquals(max, aggregator.max());
         assertEquals(total, aggregator.total());
     }
+
 }

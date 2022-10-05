@@ -1,8 +1,8 @@
-package io.github.micrometer.appdynamics;
+package io.micrometer.appdynamics;
 
-import io.github.micrometer.appdynamics.aggregation.MetricAggregator;
-import io.github.micrometer.appdynamics.aggregation.MetricSnapshot;
-import io.github.micrometer.appdynamics.aggregation.MetricSnapshotProvider;
+import io.micrometer.appdynamics.aggregation.MetricAggregator;
+import io.micrometer.appdynamics.aggregation.MetricSnapshot;
+import io.micrometer.appdynamics.aggregation.MetricSnapshotProvider;
 import io.micrometer.core.instrument.AbstractDistributionSummary;
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
@@ -16,7 +16,7 @@ public class AppDynamicsDistributionSummary extends AbstractDistributionSummary 
 
     private final MetricAggregator aggregator = new MetricAggregator();
 
-    protected AppDynamicsDistributionSummary(Id id, Clock clock,double scale) {
+    protected AppDynamicsDistributionSummary(Id id, Clock clock, double scale) {
         super(id, clock, DistributionStatisticConfig.NONE, scale, false);
     }
 

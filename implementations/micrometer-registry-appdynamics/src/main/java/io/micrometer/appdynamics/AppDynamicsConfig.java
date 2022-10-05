@@ -1,4 +1,4 @@
-package io.github.micrometer.appdynamics;
+package io.micrometer.appdynamics;
 
 import io.micrometer.core.instrument.step.StepRegistryConfig;
 
@@ -19,4 +19,5 @@ public interface AppDynamicsConfig extends StepRegistryConfig {
     default TimeUnit getBaseTimeUnit() {
         return TimeUnit.MILLISECONDS;
     }
+
 }

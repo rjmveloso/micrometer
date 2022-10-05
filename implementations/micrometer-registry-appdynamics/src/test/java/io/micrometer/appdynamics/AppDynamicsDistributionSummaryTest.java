@@ -1,6 +1,6 @@
-package io.github.micrometer.appdynamics;
+package io.micrometer.appdynamics;
 
-import io.github.micrometer.appdynamics.aggregation.MetricSnapshot;
+import io.micrometer.appdynamics.aggregation.MetricSnapshot;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MockClock;
 import io.micrometer.core.instrument.Tags;
@@ -54,7 +54,8 @@ public class AppDynamicsDistributionSummaryTest {
         assertRecordedValues(victim, 2, (long) (100 * scale), (long) (120 * scale), (long) (220 * scale));
     }
 
-    private void assertRecordedValues(AppDynamicsDistributionSummary summary, long count, long min, long max, long total) {
+    private void assertRecordedValues(AppDynamicsDistributionSummary summary, long count, long min, long max,
+            long total) {
         assertEquals(count, summary.count());
         assertEquals(min, summary.min());
         assertEquals(max, summary.max());

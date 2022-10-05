@@ -1,4 +1,4 @@
-package io.github.micrometer.appdynamics.aggregation;
+package io.micrometer.appdynamics.aggregation;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -10,15 +10,19 @@ import java.util.concurrent.atomic.LongAdder;
 public class MetricAggregator {
 
     private final LongAdder count = new LongAdder();
+
     private final LongAdder total = new LongAdder();
+
     private final AtomicLong min = new AtomicLong();
+
     private final AtomicLong max = new AtomicLong();
-    //private final TimeWindowMax max;
 
-    //AppDynamicsSummary(Clock clock, DistributionStatisticConfig distributionStatisticConfig) {
-    //    max = new TimeWindowMax(clock, distributionStatisticConfig);
-    //}
+    // private final TimeWindowMax max;
 
+    // AppDynamicsSummary(Clock clock, DistributionStatisticConfig
+    // distributionStatisticConfig) {
+    // max = new TimeWindowMax(clock, distributionStatisticConfig);
+    // }
 
     public long count() {
         return count.longValue();
@@ -44,7 +48,7 @@ public class MetricAggregator {
         if (amount >= 0) {
             count.increment();
             total.add(amount);
-            //max.record(amount);
+            // max.record(amount);
             max.updateAndGet(prev -> Math.max(prev, amount));
             min.updateAndGet(prev -> prev > 0 ? Math.min(prev, amount) : amount);
         }
