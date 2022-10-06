@@ -1,9 +1,9 @@
-package io.github.micrometer.appdynamics;
+package io.micrometer.appdynamics;
 
 import com.appdynamics.agent.api.AppdynamicsAgent;
 import com.appdynamics.agent.api.MetricPublisher;
-import io.github.micrometer.appdynamics.aggregation.MetricSnapshot;
-import io.github.micrometer.appdynamics.aggregation.MetricSnapshotProvider;
+import io.micrometer.appdynamics.aggregation.MetricSnapshot;
+import io.micrometer.appdynamics.aggregation.MetricSnapshotProvider;
 import io.micrometer.core.instrument.*;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.pause.PauseDetector;
@@ -64,7 +64,7 @@ public class AppDynamicsRegistry extends StepMeterRegistry {
         logger.info("publishing to appdynamics");
 
         getMeters().forEach(meter ->
-                // @formatter:off
+        // @formatter:off
                 meter.use(
                         gauge -> publishObservation(meter.getId(), (long) gauge.value()),
                         counter -> publishSumValue(meter.getId(), (long) counter.count()),
@@ -75,7 +75,7 @@ public class AppDynamicsRegistry extends StepMeterRegistry {
                         functionCounter -> publishSumValue(meter.getId(), (long) functionCounter.count()),
                         this::publishFunctionTimer,
                         this::noOpPublish));
-                // @formatter:on
+        // @formatter:on
     }
 
     private void noOpPublish(Meter meter) {
@@ -122,4 +122,5 @@ public class AppDynamicsRegistry extends StepMeterRegistry {
     protected TimeUnit getBaseTimeUnit() {
         return config.getBaseTimeUnit();
     }
+
 }

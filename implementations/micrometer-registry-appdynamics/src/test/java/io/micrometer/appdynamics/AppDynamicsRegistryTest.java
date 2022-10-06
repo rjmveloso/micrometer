@@ -1,4 +1,4 @@
-package io.github.micrometer.appdynamics;
+package io.micrometer.appdynamics;
 
 import com.appdynamics.agent.api.MetricPublisher;
 import io.micrometer.core.instrument.MockClock;
@@ -35,8 +35,11 @@ public class AppDynamicsRegistryTest {
     @Test
     void shouldPublishSumValue() {
         final AtomicReference<Object[]> reference = new AtomicReference<>();
-        doAnswer(invocation -> reference.getAndSet(invocation.getArguments())).when(publisher).reportMetric(anyString(),
-                anyLong(), anyString(), anyString(), anyString());
+        // @formatter:off
+        doAnswer(invocation ->
+                reference.getAndSet(invocation.getArguments())
+        ).when(publisher).reportMetric(anyString(), anyLong(), anyString(), anyString(), anyString());
+        // @formatter:on
 
         registry.counter("counter").increment(10d);
         clock.add(config.step());
@@ -49,8 +52,11 @@ public class AppDynamicsRegistryTest {
     @Test
     void shouldPublishAverageValue() {
         final AtomicReference<Object[]> reference = new AtomicReference<>();
-        doAnswer(invocation -> reference.getAndSet(invocation.getArguments())).when(publisher).reportMetric(anyString(),
-                anyLong(), anyLong(), anyLong(), anyLong(), anyString(), anyString(), anyString());
+        // @formatter:off
+        doAnswer(invocation ->
+            reference.getAndSet(invocation.getArguments())
+        ).when(publisher).reportMetric(anyString(), anyLong(), anyLong(), anyLong(), anyLong(), anyString(), anyString(), anyString());
+        // @formatter:on
 
         registry.timer("timer").record(100, TimeUnit.MILLISECONDS);
         clock.add(config.step());
@@ -64,8 +70,11 @@ public class AppDynamicsRegistryTest {
     @Test
     void shouldPublishObservationValue() {
         final AtomicReference<Object[]> reference = new AtomicReference<>();
-        doAnswer(invocation -> reference.getAndSet(invocation.getArguments())).when(publisher).reportMetric(anyString(),
-                anyLong(), anyString(), anyString(), anyString());
+        // @formatter:off
+        doAnswer(invocation ->
+            reference.getAndSet(invocation.getArguments())
+        ).when(publisher).reportMetric(anyString(), anyLong(), anyString(), anyString(), anyString());
+        // @formatter:on
 
         registry.gauge("gauge", 10);
         clock.add(config.step());
