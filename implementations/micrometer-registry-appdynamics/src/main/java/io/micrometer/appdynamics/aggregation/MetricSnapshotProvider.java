@@ -26,6 +26,9 @@ public interface MetricSnapshotProvider {
 
     MetricSnapshot snapshot();
 
-    MetricSnapshot snapshot(TimeUnit unit);
+    @Deprecated
+    default MetricSnapshot snapshot(TimeUnit unit) {
+        return snapshot();
+    }
 
 }

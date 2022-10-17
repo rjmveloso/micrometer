@@ -13,23 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micrometer.appdynamics;
-
-import io.micrometer.core.instrument.Meter;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class PathNamingConventionTest {
-
-    @Test
-    void shouldConvertPathName() {
-        AppDynamicsConfig config = AppDynamicsConfig.DEFAULT;
-
-        PathNamingConvention victim = new PathNamingConvention(config);
-        String name = victim.name("counter", Meter.Type.COUNTER);
-
-        assertThat(name).isEqualTo(config.group() + "counter");
-    }
-
-}
+package io.micrometer.appdynamics.reporter;

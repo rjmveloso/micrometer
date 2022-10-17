@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micrometer.appdynamics;
+package io.micrometer.appdynamics.reporter;
 
 import io.micrometer.core.instrument.Meter;
-import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * AppDynamics reporter interface.<br>
+ * Implementations may target Java Agent API or Machine Agent API.
+ *
+ * @author Ricardo Veloso
+ */
+public interface AppDynamicsReporter {
 
-public class PathNamingConventionTest {
+    void publishSumValue(Meter.Id id, long value);
 
-    @Test
-    void shouldConvertPathName() {
-        AppDynamicsConfig config = AppDynamicsConfig.DEFAULT;
+    void publishObservation(Meter.Id id, long value);
 
-        PathNamingConvention victim = new PathNamingConvention(config);
-        String name = victim.name("counter", Meter.Type.COUNTER);
-
-        assertThat(name).isEqualTo(config.group() + "counter");
-    }
+    void publishAggregation(Meter.Id id, long count, long value, long min, long max);
 
 }
