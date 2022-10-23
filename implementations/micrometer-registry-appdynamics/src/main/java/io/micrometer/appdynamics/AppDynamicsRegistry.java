@@ -111,7 +111,8 @@ public class AppDynamicsRegistry extends StepMeterRegistry {
 
     private void publishSnapshot(Meter.Id id, MetricSnapshotProvider provider) {
         MetricSnapshot snapshot = provider.snapshot();
-        reporter.publishAggregation(id, snapshot.count(), (long) snapshot.total(), (long) snapshot.min(), (long) snapshot.max());
+        reporter.publishAggregation(id, snapshot.count(), (long) snapshot.total(), (long) snapshot.min(),
+                (long) snapshot.max());
     }
 
     @Override

@@ -15,8 +15,6 @@
  */
 package io.micrometer.appdynamics.aggregation;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * {@link MetricSnapshot} provider.
  *
@@ -25,10 +23,5 @@ import java.util.concurrent.TimeUnit;
 public interface MetricSnapshotProvider {
 
     MetricSnapshot snapshot();
-
-    @Deprecated
-    default MetricSnapshot snapshot(TimeUnit unit) {
-        return snapshot();
-    }
 
 }

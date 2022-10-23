@@ -55,7 +55,8 @@ public class AppDynamicsAgentReporterTest {
         Meter.Id id = new Meter.Id("test.id", Tags.empty(), null, null, Meter.Type.OTHER);
         victim.publishAggregation(id, 3, 50, 20, 100);
 
-        verify(publisher).reportMetric(victim.getConventionName(id), 50, 3, 20, 100, "AVERAGE", "AVERAGE", "INDIVIDUAL");
+        verify(publisher).reportMetric(victim.getConventionName(id), 50, 3, 20, 100, "AVERAGE", "AVERAGE",
+                "INDIVIDUAL");
     }
 
     @Test
