@@ -13,16 +13,16 @@ buildscript {
     dependencies {
         classpath 'gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1'
         classpath 'com.netflix.nebula:gradle-info-plugin:11.4.1'
-        classpath 'com.netflix.nebula:nebula-release-plugin:16.0.0'
+        classpath 'com.netflix.nebula:nebula-release-plugin:16.1.0'
         classpath 'com.netflix.nebula:nebula-publishing-plugin:18.4.0'
         classpath 'com.netflix.nebula:nebula-project-plugin:9.4.0'
         classpath 'io.spring.nohttp:nohttp-gradle:0.0.10'
         classpath 'org.gradle:test-retry-gradle-plugin:1.4.1'
         classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
         classpath 'me.champeau.gradle:japicmp-gradle-plugin:0.4.1'
-        classpath 'de.undercouch:gradle-download-task:5.0.2'
-        classpath 'io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.34'
-        classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.10.0'
+        classpath 'de.undercouch:gradle-download-task:5.2.1'
+        classpath 'io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.35'
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.11.0'
 
         constraints {
             classpath('org.ow2.asm:asm:7.3.1') {
@@ -324,7 +324,7 @@ subprojects {
 
             check.dependsOn("testModules")
 
-            if (!(project.name in ['micrometer-commons', 'micrometer-observation', 'micrometer-observation-conventions', 'micrometer-observation-test', 'micrometer-registry-appdynamics'])) {
+            if (!(project.name in ['micrometer-commons', 'micrometer-observation', 'micrometer-observation-conventions', 'micrometer-observation-test', 'micrometer-jetty11', 'micrometer-registry-appdynamics'])) {
                 apply plugin: 'me.champeau.gradle.japicmp'
                 apply plugin: 'de.undercouch.download'
 
@@ -391,8 +391,12 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven {
-            url 'https://repo.spring.io/milestone/' // we only need this repo for the context-propagation
+        maven { // we only need this repo for context-propagation
+            url 'https://repo.spring.io/milestone/'
+            content { includeModule 'io.micrometer', 'context-propagation' }
+        }
+        maven { // we only need this repo for context-propagation
+            url 'https://repo.spring.io/snapshot/'
             content { includeModule 'io.micrometer', 'context-propagation' }
         }
     }
