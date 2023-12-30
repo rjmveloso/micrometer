@@ -84,7 +84,7 @@ def VERSIONS = [
         libs.testcontainers,
         libs.wiremockJunit5,
         libs.cloudwatch2,
-        'com.appdynamics.agent:agent-api:4.+'
+        libs.appdynamics
 ]
 
 def PLATFORM_BOMS = [
